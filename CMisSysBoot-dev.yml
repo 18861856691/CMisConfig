@@ -22,18 +22,11 @@ eureka:
     #ip注册
     preferIpAddress: true
     #注册名
-    instance-id: ${spring.application.name}:123
+    instance-id: ${spring.application.name}:${random.int}
     #租期更新时间间隔(默认30秒)
     lease-renewal-interval-in-seconds: 10
     #租期到期时间(默认90秒）
     lease-expiration-duration-in-seconds: 30
-  client:
-    #开启健康检查
-    healthcheck: enabled
-    #注册中心地址
-    service-url:
-      #修改默认地址
-      defaultZone: http://root:CmisEureka@192.168.0.100:28080/eureka
 
 #feign
 feign:
