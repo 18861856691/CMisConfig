@@ -1,20 +1,3 @@
-#容器配置
-server:
-  #上下文路径
-  servlet:
-    context-path: /
-  #端口
-  port: 8080
-
-#配置了上下文路径需要在状态页面和健康检查前自动拼上路径
-management:
-  #SpringBoot 1.5.X 以上默认开通了安全认证，如果不关闭会要求权限
-  security:
-    enabled: false
-  server:
-    servlet:
-      context-path: /
-
 #注册中心配置
 eureka:
   #实例配置
