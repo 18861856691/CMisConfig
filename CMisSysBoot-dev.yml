@@ -1,0 +1,48 @@
+#容器配置
+server:
+  #上下文路径
+  servlet:
+    context-path: /
+  #端口
+  port: 8080
+
+#配置了上下文路径需要在状态页面和健康检查前自动拼上路径
+management:
+  server:
+    servlet:
+      context-path: /
+
+#注册中心配置
+eureka:
+  #实例配置
+  instance:
+    #ip注册
+    preferIpAddress: true
+    #注册名
+    instance-id: ${spring.application.name}:${random.int}
+    #租期更新时间间隔(默认30秒)
+    lease-renewal-interval-in-seconds: 10
+    #租期到期时间(默认90秒）
+    lease-expiration-duration-in-seconds: 30
+  client:
+    #开启健康检查
+    healthcheck: enabled
+    #注册中心地址
+    service-url:
+      #修改默认地址
+      defaultZone: http://root:CmisEureka@192.168.0.100:28080/eureka
+
+#feign
+feign:
+  hystrix:
+    #启动断路器
+    enabled: true
+
+#断路器配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          #修改断路器模式，防止请求头丢失
+          strategy: SEMAPHORE
