@@ -5,7 +5,7 @@ eureka:
     #ip注册
     preferIpAddress: true
     #注册名
-    instance-id: ${spring.application.name}:123
+    instance-id: ${spring.application.name}:${random.int}
     #租期更新时间间隔(默认30秒)
     lease-renewal-interval-in-seconds: 10
     #租期到期时间(默认90秒）
