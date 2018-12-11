@@ -1,11 +1,111 @@
 #spring配置
 spring:
+  #管理、监视和配置应用
+  jmx:
+    #单tomcat多boot启动一定要配置domain
+    default-domain: cis_sys
+  #资源配置
+  resources:
+    #资源链
+    chain:
+      #资源策略
+      strategy:
+        #资源内容
+        content:
+          #是否开启内容版本策略，默认为false
+          enabled: true
+  #数据源
+  datasource:
+    #名称
+    name: oracle_datasourse
+    #连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    druid:
+      #监控统计拦截的filters
+      filters: mergeStat
+      #驱动器
+      driver-class-name: oracle.jdbc.OracleDriver
+      #基本属性
+      url: jdbc:oracle:thin:@192.168.0.56:1521:orcl
+      #用户名
+      username: cis
+      #密码
+      password: cis
+      #配置初始化大小/最小/最大
+      initial-size: 1
+      #最少的连接数
+      min-idle: 1
+      #最大的连接数
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      #用来验证数据库连接的查询语句
+      validation-query: select 1 from dual
+      #空闲实验数据库链接的有效性
+      test-while-idle: true
+      #检测池里连接的可用性
+      test-on-borrow: false
+      #检测池里连接能否返回数据
+      test-on-return: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: true
+      #每隔连接处理的最大预处理sql数量
+      max-pool-prepared-statement-per-connection-size: 20
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
-    
+
+#mybatis配置
+mybatis:
+  #指定mapping的位置
+  mapper-locations: classpath*:com/jsygx/ciscore/**/mapping/*.xml
+  #配置类的别名
+  type-aliases-package: com.jsygx.ciscore.model,com.jsygx.ciscore.bean
+  #检测配置文件位置
+  check-config-location: true
+  #配置
+  configuration:
+    #关闭驼峰命名
+    map-underscore-to-camel-case: false
+    #配置的缓存的全局开关
+    cache-enabled: true
+    #延时加载的开关
+    lazyLoadingEnabled: true
+    #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+    multipleResultSetsEnabled: true
+    #null值也会返回
+    call-setters-on-nulls: true
+
+#pagehelper分页配置
+pagehelper:
+  #数据库类型
+  helperDialect: oracle
+  #分页参数合理化，默认false禁用
+  #启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
+  #禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据
+  reasonable: true
+  #支持通过Mapper接口参数来传递分页参数
+  supportMethodsArguments: true
+  #增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值
+  #可以配置pageNum,pageSize,count,pageSizeZero,reasonable,orderBy,不配置映射的用默认值
+  params: count=countSql
+  #总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page
+  returnPageInfo: check
+
+#日志
+logging:
+  #打印级别
+  level:
+    #debug
+    com: debug
+
 management:
   #配置了上下文路径需要在状态页面和健康检查前自动拼上路径
   server:
