@@ -27,7 +27,7 @@ spring:
       #驱动器
       driver-class-name: oracle.jdbc.OracleDriver
       #基本属性
-      url: jdbc:oracle:thin:@192.168.0.56:1521:orcl
+      url: jdbc:oracle:thin:@192.168.0.1000:1521:orcl
       #用户名
       username: cis
       #密码
