@@ -1,3 +1,22 @@
+#spring配置
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    
+management:
+  #配置了上下文路径需要在状态页面和健康检查前自动拼上路径
+  server:
+    servlet:
+      context-path: /
+  #刷新配置
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+
 #注册中心配置
 eureka:
   #实例配置
